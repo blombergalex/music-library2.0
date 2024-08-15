@@ -2,12 +2,12 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createTheme, ThemeProvider } from '@mui/material'
 import App from './App.tsx'
-import './index.css'
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#550527',
+      // main: '#550527',
+      main: '#fff',
       light: '#faa613',
     },
     secondary: {
