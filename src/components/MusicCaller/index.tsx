@@ -1,15 +1,22 @@
 import { Button, Container, TextField } from "@mui/material";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { artistType } from "../../utils/types";
 
 const MusicCaller = () => {
- 
-  const [artist, setArtist] = useState<artistType | null> (null)
 
+  // const [artist, setArtist] = useState<artistType | null> (null)
+
+  
+  const [inputValue, setInputValue] = useState('');
+  const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    setInputValue(event.target.value);
+    console.log(inputValue)
+  };
+  
   const fetchArtistId = async():Promise<void> => {
     try {
-      // const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${enteredName}`)
-      const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/zara+d`)
+      const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${inputValue}`)
+      // const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/zara+d`)
       const data = await response.json();
 
       console.log(data);
@@ -32,19 +39,18 @@ const MusicCaller = () => {
         id="outlined-basic"
         label="Enter artist name"
         variant="outlined"
+        type="text"
         sx={{
           color: "primary.light",
         }}
-        onKeyDown={fetchArtistId}
+        // onKeyDown={fetchArtistId}
+        value={inputValue}
+        onChange={handleInputChange}
+        // lägg till att trigga även på keyDown enter key
       />
       <Button
         variant="contained"
         onClick={fetchArtistId}
-        sx={
-          {
-            // ':hover':{border: 'primary.dark', color: ''}
-          }
-        }
       >
         Search
       </Button>
