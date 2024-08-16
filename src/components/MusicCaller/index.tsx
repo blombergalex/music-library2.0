@@ -16,7 +16,6 @@ const MusicCaller = () => {
   const fetchArtistId = async():Promise<void> => {
     try {
       const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${inputValue}`)
-      // const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/zara+d`)
       const data = await response.json();
 
       console.log(data);
@@ -43,10 +42,14 @@ const MusicCaller = () => {
         sx={{
           color: "primary.light",
         }}
-        // onKeyDown={fetchArtistId}
         value={inputValue}
         onChange={handleInputChange}
-        // lägg till att trigga även på keyDown enter key
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            fetchArtistId();
+            console.log('enter key pressed')
+          }
+        }}
       />
       <Button
         variant="contained"
