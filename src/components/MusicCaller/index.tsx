@@ -1,5 +1,5 @@
 import { Button, Container, TextField } from "@mui/material";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { artistType } from "../../utils/types";
 
 const MusicCaller = () => {
@@ -8,6 +8,7 @@ const MusicCaller = () => {
 
   
   const [inputValue, setInputValue] = useState('');
+  const [searchTriggered, setSearchTriggered] = useState(false);
   const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     setInputValue(event.target.value);
     console.log(inputValue)
@@ -18,6 +19,8 @@ const MusicCaller = () => {
       const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${inputValue}`)
       const data = await response.json();
 
+      setSearchTriggered(true);
+
       console.log(data);
       console.log(data.artists.items[0].name)
       console.log(data.artists.items[0].followers.total) //total followers
@@ -26,6 +29,13 @@ const MusicCaller = () => {
         console.log("Oops! Something went wrong.")
     }
   }
+
+  useEffect(() => {
+    if (searchTriggered) {
+      setInputValue('');
+      setSearchTriggered(false);
+    }
+  }, [searchTriggered])
 
   return (
     <Container
