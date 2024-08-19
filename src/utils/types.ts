@@ -4,5 +4,6 @@ export type artistType = {
   followers: number,
   albums: string [],
   genres: string [],
-  listenOnSpotify: string
+  listenOnSpotify: string,
+  id: string
 }

@@ -7,6 +7,7 @@ const Artist = ({
   followers,
   listenOnSpotify,
   genres,
+  id,
 }: artistType) => {
 
   const formattedFollowers = followers.toLocaleString();
