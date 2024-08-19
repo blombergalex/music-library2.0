@@ -1,14 +1,15 @@
 import { Button, Container, TextField } from "@mui/material";
 import { SetStateAction, useEffect, useState } from "react";
 import { artistType } from "../../utils/types";
+import Artist from "../Artist";
 
 const MusicCaller = () => {
 
-  // const [artist, setArtist] = useState<artistType | null> (null)
+  const [artist, setArtist] = useState<artistType | null> (null)
 
   
   const [inputValue, setInputValue] = useState('');
-  const [searchTriggered, setSearchTriggered] = useState(false);
+  const [searchSuccessful, setSearchSuccessful] = useState(false);
   const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     setInputValue(event.target.value);
     console.log(inputValue)
@@ -18,30 +19,33 @@ const MusicCaller = () => {
     try {
       const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${inputValue}`)
       const data = await response.json();
+      setSearchSuccessful(true);
+      setInputValue('');
 
-      setSearchTriggered(true);
-
-      console.log(data);
-      console.log(data.artists.items[0].name)
-      console.log(data.artists.items[0].followers.total) //total followers
+      setArtist({
+        name: data.artists.items[0].name,
+        image: data.artists.items[0].images[0].url,
+        followers: data.artists.items[0].followers.total,
+        genres: data.artists.items[0].genres,
+        listenOnSpotify: data.artists.items[0].external_urls
+      })
 
     } catch (error) {
         console.log("Oops! Something went wrong.")
+        setSearchSuccessful(false)
     }
   }
 
   useEffect(() => {
-    if (searchTriggered) {
-      setInputValue('');
-      setSearchTriggered(false);
+    if (!searchSuccessful) {
+      console.log('No artist found')
     }
-  }, [searchTriggered])
+  }, [searchSuccessful]) 
 
   return (
     <Container
       sx={{
         p: 5,
-        height: "70vh", //OBS TA BORT FAST HÖJD SEN
       }}
     >
       <TextField
@@ -67,6 +71,10 @@ const MusicCaller = () => {
       >
         Search
       </Button>
+      <Container>
+        {artist && 
+        <Artist {...artist}/> } 
+      </Container>
     </Container>
   );
 };
