@@ -36,11 +36,11 @@ const MusicCaller = () => {
     }
   }
 
-  useEffect(() => {
-    if (!searchSuccessful) {
-      console.log('No artist found')
-    }
-  }, [searchSuccessful]) 
+  // useEffect(() => {
+  //   if (!searchSuccessful) {
+  //     console.log('No artist found')
+  //   }
+  // }, [searchSuccessful]) 
 
   return (
     <Container
