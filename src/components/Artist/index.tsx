@@ -10,13 +10,14 @@ const Artist = ({
 }: artistType) => {
 
   const formattedFollowers = followers.toLocaleString();
+  const formattedGenres = genres.map(genre => genre.charAt(0).toUpperCase() + genre.slice(1)).join(', ');
 
   return (
     <>
       <p>{name}</p>
       <img src={image} alt={name}></img>
       <p>Followers: {formattedFollowers}</p>
-      <p>Music genres: {genres}</p>
+      <p>Music genres: {formattedGenres}</p>
       <Box
         component="iframe"
         sx={{
