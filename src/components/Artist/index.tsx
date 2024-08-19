@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { artistType } from "../../utils/types";
+import { artistType, albumType } from "../../utils/types";
 
 const Artist = ({
   name,

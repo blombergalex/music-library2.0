@@ -1,6 +1,6 @@
 import { Button, Container, TextField } from "@mui/material";
 import { SetStateAction, useEffect, useState } from "react";
-import { artistType } from "../../utils/types";
+import { artistType, albumType } from "../../utils/types";
 import Artist from "../Artist";
 
 const MusicCaller = () => {
@@ -21,8 +21,6 @@ const MusicCaller = () => {
       const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${inputValue}`)
       const data = await response.json();
       setSearchAttempted(true);
-      setSearchSuccessful(true);
-      setInputValue('');
       
       setArtist({
         name: data.artists.items[0].name,
@@ -35,8 +33,8 @@ const MusicCaller = () => {
       })
       
       setArtistId(data.artists.items[0].id)
-      console.log(artistId)
-
+      setSearchSuccessful(true);
+      setInputValue('');
       console.log(data)
 
     } catch (error) {
@@ -50,21 +48,30 @@ const MusicCaller = () => {
 
   
   const fetchAlbums = async():Promise<void> => {
+    if(!artistId) return;
     try {
       console.log('second fetch in action')
       const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${artistId}/top-tracks`)
       const albumData = await response.json();
       console.log(albumData);
+
+      console.log(albumData.tracks);
+      // ta fram länkarna på varje track/album 
+      // mappa över albumen
+
+      // setAlbums({
+      //   name: albumData.tracks
+      // })
+
     } catch (error) {
       console.log("Couldn't find artistId")
     }
   }
   
   useEffect(() => {
-    console.log('useEffect active')
     fetchAlbums();
   
-  }, [artist])
+  }, [artistId])
 
 
 
@@ -87,7 +94,6 @@ const MusicCaller = () => {
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             fetchArtist();
-            console.log('enter key pressed')
           }
         }}
       />

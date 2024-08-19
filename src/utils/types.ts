@@ -7,3 +7,8 @@ export type artistType = {
   listenOnSpotify: string,
   id: string
 }
+
+export type albumType = {
+  name: string,
+  link: string,
+}
