@@ -9,6 +9,7 @@ const MusicCaller = () => {
 
   
   const [inputValue, setInputValue] = useState('');
+  const [searchAttempted, setSearchAttempted] = useState(false);
   const [searchSuccessful, setSearchSuccessful] = useState(false);
   const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
     setInputValue(event.target.value);
@@ -19,28 +20,37 @@ const MusicCaller = () => {
     try {
       const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${inputValue}`)
       const data = await response.json();
+      setSearchAttempted(true);
       setSearchSuccessful(true);
       setInputValue('');
-
+      
       setArtist({
         name: data.artists.items[0].name,
         image: data.artists.items[0].images[0].url,
         followers: data.artists.items[0].followers.total,
         genres: data.artists.items[0].genres,
-        listenOnSpotify: data.artists.items[0].external_urls
+        listenOnSpotify: data.artists.items[0].external_urls.spotify,
+        albums:  data.artists.items[0].external_urls.spotify
       })
+
+      console.log(data)
+      console.log(inputValue)
 
     } catch (error) {
         console.log("Oops! Something went wrong.")
-        setSearchSuccessful(false)
+        setSearchSuccessful(false);
+        setSearchAttempted(true);
+        setInputValue('');
+        setArtist(null);
     }
   }
 
-  // useEffect(() => {
-  //   if (!searchSuccessful) {
-  //     console.log('No artist found')
-  //   }
-  // }, [searchSuccessful]) 
+  useEffect(() => {
+    if (!searchSuccessful) {
+      console.log('No artist found')
+      setArtist(null)
+    }
+  }, [searchSuccessful]) 
 
   return (
     <Container
@@ -72,8 +82,13 @@ const MusicCaller = () => {
         Search
       </Button>
       <Container>
+        {searchAttempted && !searchSuccessful && 
+        <p>No artist found</p>
+        }
         {artist && 
-        <Artist {...artist}/> } 
+        <Artist {...artist}/> 
+        } 
+
       </Container>
     </Container>
   );
