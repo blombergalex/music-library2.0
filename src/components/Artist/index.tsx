@@ -1,13 +1,17 @@
 import { Box } from "@mui/material";
 import { artistType, albumType } from "../../utils/types";
 
+const Album = ({
+  link,
+}: albumType)
+
 const Artist = ({
   name,
   image,
   followers,
   listenOnSpotify,
   genres,
-  id,
+  // id,
 }: artistType) => {
 
   const formattedFollowers = followers.toLocaleString();
@@ -27,7 +31,7 @@ const Artist = ({
           width: "100%",
           height: '152px',
         }}
-        src={listenOnSpotify}
+        src={listenOnSpotify} //albumLink here
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
       />

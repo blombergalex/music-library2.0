@@ -5,9 +5,8 @@ import Artist from "../Artist";
 
 const MusicCaller = () => {
 
-  const [artist, setArtist] = useState<artistType | null> (null)
-
-  
+  const [artist, setArtist] = useState<artistType | null> (null);
+  const [albums, setAlbums] = useState<albumType | null> (null);  
   const [inputValue, setInputValue] = useState('');
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [searchSuccessful, setSearchSuccessful] = useState(false);
@@ -46,25 +45,27 @@ const MusicCaller = () => {
     }
   }
 
-  
   const fetchAlbums = async():Promise<void> => {
     if(!artistId) return;
     try {
       console.log('second fetch in action')
       const response = await fetch (`https://spotify-api-wrapper.appspot.com/artist/${artistId}/top-tracks`)
       const albumData = await response.json();
-      console.log(albumData);
 
-      console.log(albumData.tracks);
-      // ta fram länkarna på varje track/album 
-      // mappa över albumen
+      const albumLinks = albumData.tracks.map((track: { album: { external_urls: { spotify: any; }; }; }) => {
+        let fullString = track.album.external_urls.spotify;
+        let cleanedUrl = fullString.replace(/spotify: "|"/g, '');
+        return cleanedUrl;
+    });
+    
+    console.log(albumLinks);
 
-      // setAlbums({
-      //   name: albumData.tracks
-      // })
+      setAlbums({
+        link: albumLinks,
+      })
 
     } catch (error) {
-      console.log("Couldn't find artistId")
+      console.log("Oops, something went wrong")
     }
   }
   
