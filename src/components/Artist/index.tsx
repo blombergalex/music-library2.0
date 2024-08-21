@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { artistType, albumType } from "../../utils/types";
-import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
+import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 
 const Artist = ({
   name,
@@ -21,7 +21,7 @@ const Artist = ({
         textAlign={"center"}
         sx={{
           textTransform: "uppercase",
-          fontSize: { xs: "1.7rem", md: "3rem"},
+          fontSize: { xs: "1.4rem", sm: "2rem", md: "2.7rem" },
           fontWeight: "900",
           letterSpacing: 4,
           m: "24px",
@@ -38,21 +38,44 @@ const Artist = ({
           width: "70%",
         }}
       />
-      <Box sx={{ color: "primary.light", display: "flex", flexDirection: "column", alignItems:"center"}}>
+      <Box
+        sx={{
+          color: "primary.light",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Typography sx={{ fontWeight: 600, textAlign: "center", mb: 2 }}>
           Followers: {formattedFollowers}
         </Typography>
-        <Typography sx={{color: "primary.light", width: "50%", textAlign: "center", fontWeight: "600" }}>
-          Music genres: <br /> {formattedGenres}
+        {formattedGenres && formattedGenres.length > 0 && (
+        <Typography
+          sx={{
+            color: "primary.light",
+            width: "50%",
+            textAlign: "center",
+          }}
+        >
+            <Box component="span" sx={{ fontWeight: 600 }}>
+            Music genres:
+          </Box>
+          <br />
+          {formattedGenres}
         </Typography>
-        <Typography sx={{ color: "primary.light", fontWeight: "700", width: "50%", textAlign: "center", mt: 4, textTransform: "uppercase" }}>
+          )}
+        <Typography
+          sx={{
+            color: "primary.light",
+            fontWeight: "700",
+            textAlign: "center",
+            mt: 4,
+            textTransform: "uppercase",
+          }}
+        >
           Most listened albums
         </Typography>
-        <Typography sx={{ fontSize: "13px", color: "primary.light", width: "50%", textAlign: "center", textTransform:"uppercase" }}>
-           Play to enjoy 
-        </Typography> 
       </Box>
-      
       {/* {links.map((link) => ( */}
       <Box
         component="iframe"

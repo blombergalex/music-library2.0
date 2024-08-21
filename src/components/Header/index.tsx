@@ -16,7 +16,7 @@ const Header = () => {
         textAlign={"center"}
         color={"secondary.dark"}
         sx={{
-          fontSize: { xs: "1.7rem", md: "4rem" },
+          fontSize: { xs: "1.7rem", sm: "3rem", md: "4rem" },
           fontFamily: 'Matemasie'
         }}
       >
@@ -27,7 +27,7 @@ const Header = () => {
         textAlign={"center"}
         color={"primary.main"}
         sx={{
-          fontSize: { xs: "1rem", md: "3rem" },
+          fontSize: { xs: "1rem", sm: "2rem", md: "3rem" },
           padding: 2,
         }}
       >
