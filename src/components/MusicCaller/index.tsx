@@ -3,6 +3,7 @@ import { SetStateAction, useEffect, useState } from "react";
 import { artistType, albumType } from "../../utils/types";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import Artist from "../Artist";
+import MusicPlayer from "../MusicPlayer";
 
 const MusicCaller = () => {
   const [artist, setArtist] = useState<artistType | null>(null);
@@ -68,6 +69,7 @@ const MusicCaller = () => {
       setAlbums({
         links: albumLinks,
       });
+
     } catch (error) {
       console.log("Oops, something went wrong");
     }
@@ -76,6 +78,8 @@ const MusicCaller = () => {
   useEffect(() => {
     fetchAlbums();
   }, [artistId]);
+
+  console.log(albums)
 
   return (
     <Container
@@ -169,10 +173,8 @@ const MusicCaller = () => {
             }}/>
           </Box>
         )}
-        {artist && <Artist links={[]} {...artist} />}
-        {/* {albums && albums.map(link) => {
-
-        }} */}
+        {artist && <Artist {...artist} />}
+        {albums && <MusicPlayer {...albums}/>}
       </Container>
     </Container>
   );
