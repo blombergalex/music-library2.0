@@ -11,16 +11,20 @@ const theme = createTheme({
       main: '#faa613',
     },
     secondary: {
-      main: '#26638e',
-      dark: '#281a19',
+      main: '#21557b',
+      dark: '#042c54'
     }
   },
   typography: {
     h1: {
       fontWeight: 600,
+    },
+    fontFamily: [
+      'Roboto',
+      'Matemasie'
+    ].join(','),
     }
-  }
-})
+  });
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

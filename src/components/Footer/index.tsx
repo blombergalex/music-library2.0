@@ -9,7 +9,7 @@ const Footer = () => {
       sx={{
         textAlign: 'center',
         padding: '1rem',
-        backgroundColor: 'primary.light',
+        backgroundColor: 'secondary.dark',
         color: 'text.secondary',
         width: "100%",
       }}
@@ -17,12 +17,12 @@ const Footer = () => {
       <Typography
         component="p"
         sx={{
-          color: 'secondary.main',
+          color: 'primary.light',
           '& a': {
             color: 'primary.main',
-            textDecoration: 'underline',
+            textDecoration: 'none',
             '&:hover': {
-              textDecoration: 'none',
+              textDecoration: 'underline',
             },
           },
         }}

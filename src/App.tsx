@@ -11,14 +11,14 @@ function App() {
       <CssBaseline />
       <GlobalStyles
         styles={{
-          html: { height: "100vh"},
-          body: { height: "100%", margin: 0, padding: 0 },
+          html: { height: "100vh", width: "100vw"},
+          body: { height: "100%", width: "100%", margin: 0, padding: 0 },
+          "#root": { height: "100%", width: "100%"}
         }}
       />
-      <Container disableGutters
+      <Container disableGutters maxWidth={false}
         sx={{
-          backgroundColor: "primary.light",
-          bgcolor: "primary.dark",
+          backgroundColor: "primary.dark",
           color: "primary.main",
           display: "flex",
           flexDirection: "column",
@@ -26,6 +26,7 @@ function App() {
           margin: "0",
           minHeight: "100vh",
           textAlign: "center",
+          width: "100%",
         }}
       >
         <Header />

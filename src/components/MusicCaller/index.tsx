@@ -1,11 +1,12 @@
-import { Button, Box, Container, TextField } from "@mui/material";
+import { Button, Box, Container, TextField, Typography } from "@mui/material";
 import { SetStateAction, useEffect, useState } from "react";
 import { artistType, albumType } from "../../utils/types";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import Artist from "../Artist";
 
 const MusicCaller = () => {
   const [artist, setArtist] = useState<artistType | null>(null);
-  // const [albums, setAlbums] = useState<albumType | null>(null);
+  const [albums, setAlbums] = useState<albumType | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [searchSuccessful, setSearchSuccessful] = useState(false);
@@ -81,30 +82,40 @@ const MusicCaller = () => {
       sx={{
         p: 5,
         flexGrow: 1,
+        fontSize: { xs: "1.7rem", md: "5rem" },
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+        }}
+      >
         <TextField
           id="outlined-basic"
           label="Enter artist name"
           variant="outlined"
           type="text"
           sx={{
+            fontSize: { xs: "0.8rem", md: "1.5rem" },
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "primary.light", 
+                borderColor: "primary.light",
               },
               "&:hover fieldset": {
-                borderColor: "primary.main", 
+                borderColor: "primary.main",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "primary.light", 
+                borderColor: "primary.light",
               },
               "& .MuiInputLabel-root": {
-                color: "#fff", 
+                color: "#fff",
               },
               "& .MuiInputLabel-root.Mui-focused": {
-                color: "primary.light", 
+                color: "primary.light",
               },
             },
           }}
@@ -120,6 +131,7 @@ const MusicCaller = () => {
           variant="contained"
           onClick={fetchArtist}
           sx={{
+            fontSize: { xs: "0.8rem", md: "1rem" },
             backgroundColor: "primary.light",
             color: "secondary.dark",
             "&:hover": {
@@ -139,8 +151,28 @@ const MusicCaller = () => {
         </Button>
       </Box>
       <Container>
-        {searchAttempted && !searchSuccessful && <p>No artist found</p>}
+        {searchAttempted && !searchSuccessful && (
+          <Box mt={4}
+          sx={{
+            display: "flex",
+            flexDirection: {xs: "column", md: "row"},
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+          }}>
+            <Typography variant="h6">
+              No artist found
+            </Typography>
+            <SentimentVeryDissatisfiedIcon fontSize="large" 
+            sx={{
+              mt:"4" 
+            }}/>
+          </Box>
+        )}
         {artist && <Artist links={[]} {...artist} />}
+        {/* {albums && albums.map(link) => {
+
+        }} */}
       </Container>
     </Container>
   );
