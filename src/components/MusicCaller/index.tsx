@@ -67,7 +67,6 @@ const MusicCaller = () => {
       setAlbums({
         links: uniqueAlbumLinks,
       });
-
     } catch (error) {
       console.log("Oops, something went wrong");
     }
@@ -152,25 +151,31 @@ const MusicCaller = () => {
       </Box>
       <Container>
         {searchAttempted && !searchSuccessful && (
-          <Box mt={4}
-          sx={{
-            display: "flex",
-            flexDirection: {xs: "column", md: "row"},
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-          }}>
-            <Typography variant="h6">
-              No artist found
-            </Typography>
-            <SentimentVeryDissatisfiedIcon fontSize="large" 
+          <Box
+            mt={4}
             sx={{
-              mt:"4" 
-            }}/>
+              display: "flex",
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 2,
+            }}
+          >
+            <Typography variant="h6">No artist found</Typography>
+            <SentimentVeryDissatisfiedIcon
+              fontSize="large"
+              sx={{
+                mt: "4",
+              }}
+            />
           </Box>
         )}
-        {artist && <Artist {...artist} />}
-        {albums && <MusicPlayer {...albums}/>}
+        {searchSuccessful && (
+          <>
+            {artist && <Artist {...artist} />}
+            {albums && <MusicPlayer {...albums} />}
+          </>
+        )}
       </Container>
     </Container>
   );

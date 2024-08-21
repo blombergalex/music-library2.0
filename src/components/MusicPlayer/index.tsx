@@ -1,9 +1,21 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { albumType } from "../../utils/types";
 
 const MusicPlayer = ({ links }: albumType) => {
   return (
     <>
+      <Typography
+        sx={{
+          color: "primary.light",
+          fontWeight: "700",
+          textAlign: "center",
+          mt: 4,
+          mb: 4,
+          textTransform: "uppercase",
+        }}
+      >
+        Most listened albums
+      </Typography>
       {links.map((link, index) => (
         <Box
           key={index}
@@ -14,7 +26,6 @@ const MusicPlayer = ({ links }: albumType) => {
             borderRadius: "12px",
             width: "100%",
             height: "152px",
-            mt: 4,
           }}
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
