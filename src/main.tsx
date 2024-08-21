@@ -6,14 +6,13 @@ import App from './App.tsx'
 const theme = createTheme({
   palette: {
     primary: {
-      // main: '#550527',
-      main: '#fff',
-      light: '#faa613',
+      dark: '#56595a',
+      light: '#f3f3f6',
+      main: '#faa613',
     },
     secondary: {
-      main: '#F44708',
+      main: '#26638e',
       dark: '#281a19',
-      contrastText:'#688E26'
     }
   },
   typography: {
