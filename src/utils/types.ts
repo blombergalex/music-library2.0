@@ -7,5 +7,5 @@ export type artistType = {
 }
 
 export type albumType = {
-  links: string[],
+  links: any[],
 }

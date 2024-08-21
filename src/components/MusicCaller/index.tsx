@@ -66,8 +66,12 @@ const MusicCaller = () => {
 
       console.log(albumLinks);
 
+      const uniqueAlbumLinks = [...new Set(albumLinks)];
+
+      console.log(uniqueAlbumLinks);
+
       setAlbums({
-        links: albumLinks,
+        links: uniqueAlbumLinks,
       });
 
     } catch (error) {
