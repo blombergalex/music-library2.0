@@ -37,20 +37,18 @@ const MusicCaller = () => {
       setArtistId(data.artists.items[0].id);
       setSearchSuccessful(true);
       setInputValue("");
-      console.log(data);
     } catch (error) {
-      console.log("Oops! Something went wrong.");
       setSearchSuccessful(false);
       setSearchAttempted(true);
       setInputValue("");
       setArtist(null);
+      console.log("Oops, something went wrong");
     }
   };
 
   const fetchAlbums = async (): Promise<void> => {
     if (!artistId) return;
     try {
-      console.log("second fetch in action");
       const response = await fetch(
         `https://spotify-api-wrapper.appspot.com/artist/${artistId}/top-tracks`
       );
@@ -64,11 +62,7 @@ const MusicCaller = () => {
         }
       );
 
-      console.log(albumLinks);
-
       const uniqueAlbumLinks = [...new Set(albumLinks)];
-
-      console.log(uniqueAlbumLinks);
 
       setAlbums({
         links: uniqueAlbumLinks,
@@ -82,8 +76,6 @@ const MusicCaller = () => {
   useEffect(() => {
     fetchAlbums();
   }, [artistId]);
-
-  console.log(albums)
 
   return (
     <Container

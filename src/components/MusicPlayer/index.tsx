@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import { albumType } from "../../utils/types";
 
 const MusicPlayer = ({ links }: albumType) => {
-  console.log(links);
   return (
     <>
       {links.map((link, index) => (
