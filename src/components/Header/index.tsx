@@ -14,10 +14,10 @@ const Header = () => {
       <Typography
         variant="h1"
         textAlign={"center"}
-        color={"secondary.dark"}
+        color={"primary.main"}
         sx={{
           fontSize: { xs: "1.7rem", sm: "3rem", md: "4rem" },
-          fontFamily: 'Matemasie'
+          fontFamily: "Matemasie",
         }}
       >
         The Music Library 2.0
@@ -25,18 +25,19 @@ const Header = () => {
       <Typography
         variant="h2"
         textAlign={"center"}
-        color={"primary.main"}
         sx={{
+          color: { xs: "secondary.main", md: "secondary.dark" },
           fontSize: { xs: "1rem", sm: "2rem", md: "3rem" },
           padding: 2,
+          width: { xs: "270px", sm: "500px", md: "600px" },
         }}
       >
-        Get your favourite music
+        Check out the top albums of your favourite artists
       </Typography>
       <Box
         sx={{
           height: "1.5px",
-          backgroundColor: "secondary.main",
+          backgroundColor: "secondary.dark",
           margin: "1rem 0",
           width: "90%",
         }}

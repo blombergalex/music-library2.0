@@ -137,13 +137,6 @@ const MusicCaller = () => {
               backgroundColor: "primary.light",
               color: "primary.main",
             },
-            "&:active": {
-              backgroundColor: "primary.dark",
-            },
-            "&:focus": {
-              outline: "none",
-              backgroundColor: "primary.light",
-            },
           }}
         >
           Search

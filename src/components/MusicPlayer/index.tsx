@@ -9,7 +9,7 @@ const MusicPlayer = ({ links }: albumType) => {
           color: "primary.light",
           fontWeight: "700",
           textAlign: "center",
-          mt: 4,
+          mt: 8,
           mb: 4,
           textTransform: "uppercase",
         }}

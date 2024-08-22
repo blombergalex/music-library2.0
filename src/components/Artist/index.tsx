@@ -26,7 +26,8 @@ const Artist = ({ name, image, followers, genres }: artistType) => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          flexDirection: { sm: "column", md: "row" },
+          alignItems: { xs: "center", md: "end" },
+          flexDirection: { xs: "column", md: "row" },
         }}
       >
         <Box
@@ -35,9 +36,10 @@ const Artist = ({ name, image, followers, genres }: artistType) => {
           component="img"
           sx={{
             borderRadius: "15px",
-            width: { sm: "70%", md: "35%" },
+            width: { sm: "60%", md: "45%" },
             height: "auto",
-            mr: 2,
+            mr: { md: 2 },
+            marin: "auto",
           }}
         />
         <Box
@@ -47,12 +49,23 @@ const Artist = ({ name, image, followers, genres }: artistType) => {
             flexDirection: "column",
             justifyContent: "end",
             letterSpacing: 2,
+            width: { sm: "60%", md: "45%" },
           }}
         >
-          <Typography 
-          sx={{ 
-            fontWeight: 600, textAlign: "start", mb: 2 }}>
-            Followers: <br/> {formattedFollowers}
+          <Typography
+            sx={{
+              textAlign: "start",
+              mt: 2,
+            }}
+          >
+            <Box
+              sx={{
+                fontWeight: 600,
+              }}
+            >
+              Followers:
+            </Box>
+            {formattedFollowers}
           </Typography>
           {formattedGenres && formattedGenres.length > 0 && (
             <Typography
