@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Box, Container, TextField, Typography } from "@mui/material";
 import { SetStateAction, useEffect, useState } from "react";
 import { artistType, albumType } from "../../utils/types";
@@ -19,6 +21,9 @@ const MusicCaller = () => {
   };
 
   const fetchArtist = async (): Promise<void> => {
+
+    setAlbums(null);
+    
     try {
       const response = await fetch(
         `https://spotify-api-wrapper.appspot.com/artist/${inputValue}`
