@@ -1,6 +1,13 @@
-'use client'
+"use client";
 
-import { Button, Box, Container, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Box,
+  Container,
+  TextField,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { SetStateAction, useEffect, useState } from "react";
 import { artistType, albumType } from "../../utils/types";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
@@ -13,6 +20,7 @@ const MusicCaller = () => {
   const [inputValue, setInputValue] = useState("");
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [searchSuccessful, setSearchSuccessful] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [artistId, setArtistId] = useState(null);
   const handleInputChange = (event: {
     target: { value: SetStateAction<string> };
@@ -21,9 +29,9 @@ const MusicCaller = () => {
   };
 
   const fetchArtist = async (): Promise<void> => {
-
+    setLoading(true);
     setAlbums(null);
-    
+
     try {
       const response = await fetch(
         `https://spotify-api-wrapper.appspot.com/artist/${inputValue}`
@@ -48,11 +56,17 @@ const MusicCaller = () => {
       setInputValue("");
       setArtist(null);
       console.log("Oops, something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
   const fetchAlbums = async (): Promise<void> => {
     if (!artistId) return;
+
+    setLoading(true);
+    setAlbums(null);
+
     try {
       const response = await fetch(
         `https://spotify-api-wrapper.appspot.com/artist/${artistId}/top-tracks`
@@ -74,6 +88,8 @@ const MusicCaller = () => {
       });
     } catch (error) {
       console.log("Oops, something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -171,7 +187,13 @@ const MusicCaller = () => {
         {searchSuccessful && (
           <>
             {artist && <Artist {...artist} />}
-            {albums && <MusicPlayer {...albums} />}
+            {loading ? (
+              <Box display="flex" justifyContent="center" mt={6}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              albums && <MusicPlayer {...albums} />
+            )}
           </>
         )}
       </Container>
