@@ -38,8 +38,9 @@ const Artist = ({ name, image, followers, genres }: artistType) => {
           component="img"
           sx={{
             borderRadius: "15px",
-            width: { sm: "60%", md: "45%" },
-            height: "auto",
+            width: { xs: "60%", md: "45%" },
+            aspectRatio: "1/1",
+            objectFit: "cover",
             mr: { md: 2 },
             marin: "auto",
           }}
